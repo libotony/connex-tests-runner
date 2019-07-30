@@ -1,0 +1,54 @@
+{
+  "name": "connex-tests-runner",
+  "version": "1.0.0",
+  "description": "connex tests running in nodejs",
+  "scripts": {
+    "bootstrap": "rm -fr ./connex-src && mkdir connex-src && npm run framework && npm run driver && npm run load-tests",
+    "load-tests": "npm i git+https://github.com/libotony/connex-tests.git -S",
+    "framework": "cd ./connex-src && git clone https://github.com/vechain/connex-framework.git && cd connex-framework && npm i",
+    "driver": "cd ./connex-src && git clone https://github.com/vechain/connex.driver-nodejs.git && cd connex.driver-nodejs && npm i",
+    "test": "TS_NODE_FILES=true NODE_ENV=test npx mocha --require ts-node/register --timeout 20000 --exit 'test/framework.test.ts'",
+    "cover": "TS_NODE_FILES=true NODE_ENV=test nyc npm t"
+  },
+  "nyc": {
+    "include": [
+      "connex-src/connex-framework/dist/**/*.js",
+      "connex-src/connex.driver-nodejs/dist/**/*.js"
+    ],
+    "exclude": [
+      "test/",
+      "**/*.d.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html",
+      "text-summary"
+    ],
+    "all": true,
+    "excludeAfterRemap": false
+  },
+  "author": "tony.li",
+  "license": "MIT",
+  "dependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.6.8",
+    "connex-tests": "git+https://github.com/libotony/connex-tests.git",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/libotony/connex-tests-runner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/libotony/connex-tests-runner/issues"
+  },
+  "homepage": "https://github.com/libotony/connex-tests-runner#readme"
+}

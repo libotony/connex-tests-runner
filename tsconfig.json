@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "strict": true,
+      "inlineSourceMap": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "types": [
+        "node",
+        "mocha"
+      ]
+    },
+    "include": [],
+    "exclude": []
+  }
